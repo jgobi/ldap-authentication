@@ -7,7 +7,7 @@ declare module 'ldap-authentication' {
 
   export interface LdapAuthenticationBaseOptions {
     ldapOpts: ClientOptions
-    starttls?: boolean = false
+    starttls?: boolean
 
     groupsSearchBase?: string
     groupClass?: string
@@ -19,7 +19,7 @@ declare module 'ldap-authentication' {
     extends LdapAuthenticationBaseOptions {
     userDn: string
     userPassword: string
-  } // true
+  }
 
   export interface LdapAuthenticationOptionsAdminCommon
     extends LdapAuthenticationBaseOptions {
@@ -28,18 +28,18 @@ declare module 'ldap-authentication' {
     userSearchBase: string
     usernameAttribute: string
     username: string
-  } // user
+  }
 
   export interface LdapAuthenticationOptionsAdmin
     extends LdapAuthenticationOptionsAdminCommon {
     verifyUserExists?: false
     userPassword: string
-  } // user
+  }
 
   export interface LdapAuthenticationOptionsAdminSearch
     extends LdapAuthenticationOptionsAdminCommon {
     verifyUserExists: true
-  } // user
+  }
 
   export interface LdapAuthenticationOptionsSelf
     extends LdapAuthenticationBaseOptions {
@@ -59,7 +59,11 @@ declare module 'ldap-authentication' {
   ): Promise<SearchEntryObject | null>
 
   export function authenticate(
-    options: LdapAuthenticationOptionsAdminCommon
+    options: LdapAuthenticationOptionsAdmin
+  ): Promise<SearchEntryObject | null>
+
+  export function authenticate(
+    options: LdapAuthenticationOptionsAdminSearch
   ): Promise<SearchEntryObject | null>
 
 }
