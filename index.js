@@ -86,9 +86,6 @@ async function _searchUser(
         res.on('searchEntry', function (entry) {
           user = entry.object
         })
-        res.on('searchReference', function (referral) {
-          ldapOpts.log && ldapOpts.log.log('referral: ' + referral.uris.join())
-        })
         res.on('error', function (err) {
           reject(err)
           ldapClient.unbind()
